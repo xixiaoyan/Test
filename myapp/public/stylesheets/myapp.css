@@ -1,0 +1,11 @@
+body{
+    background-image: url("../images/slide03.jpg");
+    background-repeat:no-repeat;
+    background-color: #484D50;
+}
+a{
+    color: #FFFFFF;
+}
+.mar{
+    margin-top: 20px;
+}

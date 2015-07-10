@@ -1,0 +1,70 @@
+<% include header.html %>
+<% include nav.html %>
+<div class="container">
+    <div class="jumbotron">
+        <h1>Register</h1>
+        <p>Enter your username and password and complete the register.</p>
+        <div class="view">
+           <!-- <form class="form-horizontal" action="register" method="post">-->
+                <div class="control-group">
+                    <label class="control-label">UserName</label>
+                    <div class="controls">
+                        <input id="username" name="username" placeholder="UserName" type="text" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">PassWord</label>
+                    <div class="controls">
+                        <input id="password" name="password" placeholder="PassWord" type="password" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">PassWord</label>
+                    <div class="controls">
+                        <input id="repassword"  placeholder="RePassWord" type="password" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls mar">
+                        <input type="button" class="btn" onclick="register();" value="Register" />
+                    </div>
+                </div>
+            <!--</form>-->
+        </div>
+    </div>
+</div>
+<% include footer.html %>
+<script>
+    function register(){
+        var username= $.trim($("#username").val());
+        var password= $.trim($("#password").val());
+        var repassword= $.trim($("#repassword").val());
+        if(username=="" || password=="" || repassword==""){
+            alert("请填写完整！");
+            return ;
+        }
+        if(password!=repassword){
+            alert("两次输入密码不相同！");
+            return;
+        }
+        var params={username:username,password:password};
+        $.ajax({
+            data:params,
+            type:'post',
+            url:'/register',
+            dataType:'json',
+            cache:false,
+            timeout:2000,
+            success:function(data){
+               // alert("----"+data.message+"----"+data.success+"----");
+                alert(data.message);
+                if(data.success=='1'){
+                  window.location.href="/login";
+                }
+            },
+            error:function(jqXHR, textStatus, errorThrown){
+                alert('error ' + textStatus + " " + errorThrown);
+            }
+        });
+    }
+</script>

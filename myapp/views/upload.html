@@ -1,0 +1,172 @@
+<% include header.html %>
+<% include nav.html %>
+<link rel="stylesheet" href="/common/uploadify/uploadify.css">
+<script src="/common/uploadify/jquery.uploadify.min.js"></script>
+<div class="container">
+    <div class="jumbotron">
+        <h1>Upload</h1>
+        <p>Upload your files.</p>
+        <!--iframe form提交 -->
+       <!-- <div class="view">
+           Files:<div class="data">(None)</div>
+            <button class="choose">Choose File</button>
+            <iframe src="/upl" frameborder="0" id="upl"></iframe>
+        </div>-->
+        <!--<form enctype="multipart/form-data" method="post" action="javascript:uploadFile();" role="form" id="frmUploadFile">
+            <div class = "form-group">
+                <label class = "control-label col-sm-2">Choose File</label>
+                <div class = "col-sm-4">
+                    <input type = "file" name = "files" class = "form-control" />
+                </div>
+            </div>
+            <div class = "form-group">
+                <div class = "col-sm-offset-2 col-sm-4">
+                    <button class = "btn btn-primary" onClick = "uploadFile()">upload</button>
+                    <span class = "help-inline" id = "spanMessage">Choose File,And Upload</span>
+                </div>
+            </div>
+        </form>
+        <div class = "row" style = "text-align: center">
+            <img id = "imgShow" />
+        </div>-->
+        <div class = "form-group">
+            <label class = "control-label col-sm-2">Choose File</label>
+            <div class = "col-sm-4">
+                <!--<input type = "file" name = "files" class = "form-control" />-->
+                <input type="file" name="litImg" class='file_input'  id="litImg" />
+            </div>
+        </div>
+        <div class = "form-group">
+            <div class = "col-sm-offset-2 col-sm-4">
+                <button class = "btn btn-primary" onClick = "uploadFile()">upload</button>
+                <span class = "help-inline" id = "spanMessage">Choose File,And Upload</span>
+            </div>
+        </div>
+        <div class = "row" style = "text-align: center">
+            <img id = "imgShow" />
+        </div>
+    </div>
+</div>
+<% include footer.html %>
+<script>
+    $(function(){
+        $('#litImg').uploadify({
+            'auto' : true,
+            'buttonCursor' : 'hand',
+            'buttonText' : 'Choose File',
+            'height' : 25,
+            'width' : 80,
+            'fileObjName' : 'litImg',
+            'multi' :false,
+            'swf' : '/common/uploadify/uploadify.swf',
+            'uploader' : '/doUpload',
+            'uploadLimit' : 1 ,
+            'fileTypeDesc' : 'Supporting Format:jpg/jpeg/png/gif.', //如果配置了以下的'fileExt'属性，那么这个属性是必须的
+            'fileTypeExts' : '*.jpg;*.jpeg;*.png;*.gif',//允许的格式
+            'fileSizeLimit' : '300KB',
+            'onUploadStart' :function(){
+                $('#litImg').uploadify('disable', true);
+            },
+            'onUploadSuccess' : function(file, data, response) {
+                $('#litImg').uploadify('disable', false);
+               // $('#imgPath').val(data);
+                $('#litImg').uploadify('cancel','*');
+
+            },'onSelectError' : function() {
+                $('#litImg').uploadify('disable', false);
+                $('#litImg').uploadify('cancel','*');
+            },'onUploadError' : function(file, errorCode, errorMsg, errorString) {
+                $('#litImg').uploadify('disable', false);
+                $('#litImg').uploadify('cancel','*');
+            }
+        });
+    });
+   /* function uploadFile(){
+        var formData=new FormData($("#frmUploadFile")[0]);
+        $.ajax({
+            url:'/doUpload',
+            type:'POST',
+            data:formData,
+            async:false,
+            cache:false,
+            contentType:false,
+            processData:false,
+            success:function(data){
+                alert("---"+data+"---");
+                if(200 === data.code){
+                    $("#imgShow").attr('src',data.msg.url);
+                    $("#spanMessage").html("Upload Success");
+                }else{
+                    $("#spanMessage").html("Upload Fail");
+                }
+                console.log("imgUploader upload success ,data:",data);
+            },
+            error:function(){
+                $("#spanMessage").html("Something Error");
+            }
+        });
+    }*/
+   /* $(function(){
+        $('#file_upload').click(function(){
+
+            var data = new FormData();
+            var files = $('#file')[0].files;
+
+            if (files) {
+                data.append('codecsv',files[0]);
+            }
+            data.append("test","test111");
+            alert("----"+data+"----");
+            console.log("----"+data+"----");
+            $.ajax({
+                cache: false,
+                type: 'post',
+                dataType: 'json',
+                url:'doUpload',
+                data : data,
+                contentType: false,
+                processData: false,
+                success : function () {
+                    alert("upload success !");
+                    console.log("upload success !");
+                }
+            });
+        });
+
+    })*/
+  /* iframe form提交
+  window.onload = function(){
+       var frame = $("#upl")[0];
+       var cd;
+
+       frameInit()
+       frame.onload = function(){
+           frameInit()
+           if($(cd).find("#path").length>0){
+               var path = $(cd).find("#path")[0].innerHTML;
+               if(/png|gif|jpg/g.test(path)){
+                   $(".data").html("<img src='"+path+"'><br>")
+               }else {
+                   $(".data").html("<a href='"+path+"' target='_blank'>"+path+"</a><br>")
+               }
+
+               frame.src = "/upl";
+           }
+       }
+
+       $(".choose").click(function(){
+           $(cd).find("#data").click();
+       });
+
+       function frameInit(){
+           cd = frame.contentDocument.body;
+
+           var img = $(cd).find("#data")[0]
+           if(img){
+               img.onchange = function(){
+                   $(cd).find("#sub").click();
+               }
+           }
+       }
+   }*/
+</script>

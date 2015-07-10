@@ -1,0 +1,48 @@
+<% include header.html %>
+<% include nav.html %>
+<link rel="stylesheet" href="/stylesheets/signin.css">
+<!--<div class="container">
+    <div class="jumbotron">
+        <h1>Login</h1>
+        <p>Enter your username and password and complete the login.</p>
+        <div class="view">
+            <form class="form-horizontal" action="ucenter" method="post">
+                <div class="control-group">
+                    <label class="control-label">UserName</label>
+                    <div class="controls">
+                        <input id="username" name="username" placeholder="UserName" type="text" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">PassWord</label>
+                    <div class="controls">
+                        <input id="password" name="password" placeholder="PassWord" type="password" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls mar">
+                        <button type="submit" class="btn">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>-->
+<div class="container">
+    <form class="form-signin" action="ucenter" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <!--<label for="inputEmail" class="sr-only">Email address</label>-->
+        <input id="username" name="username"  class="form-control" placeholder="UserName" type="text"  required autofocus />
+       <!-- <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>-->
+        <!--<label for="inputPassword" class="sr-only">Password</label>-->
+        <input id="password" name="password" class="form-control" placeholder="PassWord" type="password" />
+       <!-- <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>-->
+       <!-- <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>&lt;!&ndash;功能未实现&ndash;&gt;
+        </div>-->
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+</div>
+<% include footer.html %>
